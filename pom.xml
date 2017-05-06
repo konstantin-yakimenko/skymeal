@@ -49,6 +49,7 @@
         <webjars-datatables.version>1.10.12</webjars-datatables.version>
 
         <guava.version>21.0</guava.version>
+        <hsql.version>2.3.4</hsql.version>
     </properties>
 
     <build>
@@ -116,6 +117,11 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>${hsql.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
