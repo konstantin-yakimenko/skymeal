@@ -10,10 +10,10 @@
 
     <bean class="ru.jakimenko.skymeal.web.json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>
 
-    <!-- serve static resources (*.html, ...) from src/main/webapp/ -->
     <mvc:default-servlet-handler/>
 
-    <security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
+    <!-- TODO security and webjars -->
+    <!--<security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>-->
 
     <mvc:annotation-driven conversion-service="conversionService">
         <mvc:message-converters>
@@ -46,7 +46,7 @@
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <!-- uses WebJars so Javascript and CSS libs can be declared as Maven dependencies (Bootstrap, jQuery...) -->
-    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
+    <!--<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>-->
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"
