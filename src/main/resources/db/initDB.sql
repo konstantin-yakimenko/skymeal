@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS planes;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS schedule;
 DROP SEQUENCE IF EXISTS global_seq;
 
 CREATE SEQUENCE global_seq START 100000;
@@ -32,3 +33,25 @@ CREATE TABLE planes (
   seat_business INTEGER DEFAULT 0 NOT NULL
 );
 CREATE UNIQUE INDEX planes_unique_bortnumber_idx ON planes(name);
+
+CREATE TABLE schedule (
+  id              INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  date            TIMESTAMP DEFAULT now(),
+  number          INTEGER DEFAULT 0 NOT NULL,
+  region_date     TIMESTAMP DEFAULT now(),
+  plan_start      TIMESTAMP DEFAULT now(),
+  plan_finish     TIMESTAMP DEFAULT now(),
+  airport_start   VARCHAR NOT NULL,
+  airport_finish  VARCHAR NOT NULL,
+  fact_start      TIMESTAMP DEFAULT now(),
+  fact_finish     TIMESTAMP DEFAULT now(),
+  fact_start_utc  TIMESTAMP DEFAULT now(),
+  fact_finish_utc TIMESTAMP DEFAULT now(),
+  airport_fact    VARCHAR NOT NULL,
+  plane_id        INTEGER NOT NULL,
+  pas_econom      INTEGER DEFAULT 0 NOT NULL,
+  pas_business    INTEGER DEFAULT 0 NOT NULL,
+  pilots          INTEGER DEFAULT 0 NOT NULL,
+  strewards       INTEGER DEFAULT 0 NOT NULL,
+  FOREIGN KEY (plane_id) REFERENCES planes (id) ON DELETE CASCADE
+);

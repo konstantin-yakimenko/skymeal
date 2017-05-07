@@ -3,11 +3,9 @@ package ru.jakimenko.skymeal.model;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
+import java.util.List;
 
 /**
  * Created by konst on 06.05.17.
@@ -28,6 +26,11 @@ public class Plane  extends NamedEntity {
     @Column(name = "seat_business", columnDefinition = "default 0")
     @Digits(fraction = 0, integer = 3)
     protected int seatBusiness;
+
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "plane")
+    @OrderBy("dateTime DESC")
+//    @JsonIgnore
+    protected List<Schedule> schedules;
 
     public String getType() {
         return type;
@@ -51,6 +54,14 @@ public class Plane  extends NamedEntity {
 
     public void setSeatBusiness(Integer seatBusiness) {
         this.seatBusiness = seatBusiness;
+    }
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
     }
 
     public Plane() {}

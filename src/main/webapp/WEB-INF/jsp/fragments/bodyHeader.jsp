@@ -15,6 +15,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="users"><spring:message code="sprav.users"/></a></li>
                         <li><a href="planes"><spring:message code="sprav.planes"/></a></li>
+                        <li><a href="schedules"><spring:message code="sprav.schedules"/></a></li>
                     </ul>
                 </li>
                 <%--

@@ -26,6 +26,11 @@ public class RootController extends AbstractUserController {
         return "planes";
     }
 
+    @RequestMapping(value = "/schedules", method = RequestMethod.GET)
+    public String schedules() {
+        return "schedules";
+    }
+
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String main() {
         return "main";
