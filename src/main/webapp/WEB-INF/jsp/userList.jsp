@@ -10,6 +10,9 @@
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
+<script type="text/javascript" src="resources/js/datatablesUtil.js" defer></script>
+<script type="text/javascript" src="resources/js/userDatatables.js" defer></script>
+
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
@@ -74,7 +77,9 @@
 
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" onclick="save()" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            </button>
                         </div>
                     </div>
                 </form:form>
@@ -88,6 +93,4 @@
 </script>
 <script type="text/javascript" src="webjars/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
-<script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
-<script type="text/javascript" src="resources/js/userDatatables.js"></script>
 </html>

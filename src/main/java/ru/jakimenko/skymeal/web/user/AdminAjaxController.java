@@ -7,8 +7,8 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import ru.jakimenko.skymeal.model.User;
 import ru.jakimenko.skymeal.View;
+import ru.jakimenko.skymeal.model.User;
 import ru.jakimenko.skymeal.to.UserTo;
 import ru.jakimenko.skymeal.util.UserUtil;
 

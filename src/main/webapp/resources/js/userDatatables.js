@@ -1,18 +1,27 @@
 var ajaxUrl = 'ajax/admin/users/';
 var datatableApi;
+var editTitleKey ="users.edit";
 
 function updateTable() {
     $.get(ajaxUrl, updateTableByData);
 }
 
+function enable(chkbox, id) {
+    var enabled = chkbox.is(":checked");
+    $.ajax({
+        url: ajaxUrl + id,
+        type: 'POST',
+        data: 'enabled=' + enabled,
+        success: function () {
+            chkbox.closest('tr').toggleClass('disabled');
+            successNoty(enabled ? 'common.enabled' : 'common.disabled');
+        }
+    });
+}
+
+// $(document).ready(function () {
 $(function () {
-    datatableApi = $('#datatable').DataTable({
-        "ajax": {
-            "url": ajaxUrl,
-            "dataSrc": ""
-        },
-        "paging": false,
-        "info": true,
+    datatableApi = $('#datatable').DataTable(extendsOpts({
         "columns": [
             {
                 "data": "name"
@@ -50,9 +59,7 @@ $(function () {
             {
                 "orderable": false,
                 "defaultContent": "",
-                "render": function (date, type, row) {
-                    return renderEditBtn(type, row, 'users.edit');
-                }
+                "render": renderEditBtn
             },
             {
                 "orderable": false,
@@ -68,9 +75,8 @@ $(function () {
         ],
         "createdRow": function (row, data, dataIndex) {
             if (!data.enabled) {
-                $(row).css("text-decoration", "line-through");
+                $(row).addClass("disabled");
             }
-        },
-        "initComplete": makeEditable
-    });
+        }
+    }));
 });

@@ -2,61 +2,68 @@ var form;
 
 function makeEditable() {
     form = $('#detailsForm');
-
-    form.submit(function () {
-        save();
-        return false;
-    });
-
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(event, jqXHR, options, jsExc);
     });
 
+/*
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     $(document).ajaxSend(function(e, xhr, options) {
         xhr.setRequestHeader(header, token);
     });
+*/
 }
 
-function add(key) {
+// https://api.jquery.com/jquery.extend/#jQuery-extend-deep-target-object1-objectN
+function extendsOpts(opts) {
+    $.extend(true, opts,
+        {
+            "ajax": {
+                "url": ajaxUrl,
+                "dataSrc": ""
+            },
+            "paging": false,
+            "info": true,
+            "language": {
+                "search": i18n["common.search"]
+            },
+            "initComplete": makeEditable
+        }
+    );
+    return opts;
+}
+
+function add(title) {
+    $('#modalTitle').html(title);
     form.find(":input").val("");
-    $('#modalTitle').html(i18n[key]);
     $('#editRow').modal();
 }
 
-function updateRow(id, key) {
-    $('#modalTitle').html(i18n[key]);
+function updateRow(id) {
+    $('#modalTitle').html(i18n[editTitleKey]);
     $.get(ajaxUrl + id, function (data) {
         $.each(data, function (key, value) {
             form.find("input[name='" + key + "']").val(
-                key === "dateTime" ? value.replace('T', ' ').substr(0, 16) : value
+                key === "dateTime" ? formatDate(value) : value
             );
         });
         $('#editRow').modal();
     });
 }
 
+function formatDate(date) {
+    return date.replace('T', ' ').substr(0, 16);
+}
+
 function deleteRow(id) {
+    debugger;
     $.ajax({
         url: ajaxUrl + id,
         type: 'DELETE',
         success: function () {
             updateTable();
-            successNoty('Deleted');
-        }
-    });
-}
-
-function enable(chkbox, id) {
-    var enabled = chkbox.is(":checked");
-    chkbox.closest('tr').css("text-decoration", enabled ? "none" : "line-through");
-    $.ajax({
-        url: ajaxUrl + id,
-        type: 'POST',
-        data: 'enabled=' + enabled,
-        success: function () {
-            successNoty(enabled ? 'Enabled' : 'Disabled');
+            successNoty('common.deleted');
         }
     });
 }
@@ -73,7 +80,7 @@ function save() {
         success: function () {
             $('#editRow').modal('hide');
             updateTable();
-            successNoty('Saved');
+            successNoty('common.saved');
         }
     });
 }
@@ -87,10 +94,10 @@ function closeNoty() {
     }
 }
 
-function successNoty(text) {
+function successNoty(key) {
     closeNoty();
     noty({
-        text: text,
+        text: i18n[key],
         type: 'success',
         layout: 'bottomRight',
         timeout: true
@@ -100,21 +107,27 @@ function successNoty(text) {
 function failNoty(event, jqXHR, options, jsExc) {
     closeNoty();
     var errorInfo = $.parseJSON(jqXHR.responseText);
+
+    // http://tomcat.apache.org/tomcat-8.5-doc/changelog.html
+    // RFC 7230 states that clients should ignore reason phrases in HTTP/1.1 response messages.
+    // Since the reason phrase is optional, Tomcat no longer sends it (statusText).
     failedNote = noty({
-        text: 'Failed: ' + jqXHR.statusText + '<br>' + errorInfo.cause + '<br>' + errorInfo.details.join('<br>'),
+        text: i18n['common.status'] + ': ' + jqXHR.status + "<br>"+ errorInfo.cause + "<br>" + errorInfo.details.join("<br>"),
         type: 'error',
         layout: 'bottomRight'
     });
 }
 
-function renderEditBtn(type, row, key) {
+function renderEditBtn(data, type, row) {
     if (type == 'display') {
-        return '<a class="btn btn-xs btn-primary" onclick="updateRow(' + row.id + ',\'' + key + '\');">' + i18n['common.edit'] + '</a>';
+        return '<a class="btn btn-xs btn-primary" onclick="updateRow(' + row.id + ')">' +
+            '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>';
     }
 }
 
 function renderDeleteBtn(data, type, row) {
     if (type == 'display') {
-        return '<a class="btn btn-xs btn-danger" onclick="deleteRow(' + row.id + ');">' + i18n['common.delete'] + '</a>';
+        return '<a class="btn btn-xs btn-danger" onclick="deleteRow(' + row.id + ')">'+
+            '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>';
     }
 }
