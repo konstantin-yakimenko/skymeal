@@ -2,20 +2,22 @@ package ru.jakimenko.skymeal.web.plane;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import ru.jakimenko.skymeal.model.Plane;
 import ru.jakimenko.skymeal.service.IPlaneService;
-import ru.jakimenko.skymeal.service.PlaneService;
-import ru.jakimenko.skymeal.to.PlaneTo;
 
 import java.util.List;
 
 /**
  * Created by konst on 06.05.17.
  */
-public class AbstractPlaneController {
+public abstract class AbstractPlaneController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
-    private IPlaneService service = new PlaneService();
+    @Autowired
+    @Qualifier("planeService")
+    private IPlaneService service;
 
     public List<Plane> getAll() {
         log.info("getAll");
@@ -34,18 +36,13 @@ public class AbstractPlaneController {
     }
 
     public void delete(int id) {
-//        checkModificationAllowed(id);
         log.info("delete " + id);
         service.delete(id);
     }
 
-    public void update(Plane plane, int id) {
-//        checkModificationAllowed(id);
-        plane.setId(id);
+    public void update(Plane plane) {
         log.info("update " + plane);
         service.update(plane);
     }
 
-    public void update(PlaneTo planeTo) {
-    }
 }

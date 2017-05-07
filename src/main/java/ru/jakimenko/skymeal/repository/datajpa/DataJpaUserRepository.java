@@ -11,10 +11,10 @@ import java.util.List;
  * Created by konst on 06.05.17.
  */
 @Repository
-public class DataJpaUserRepositoryImpl implements IUserRepository {
+public class DataJpaUserRepository implements IUserRepository {
 
     @Autowired
-    private ProxyUserRepository proxy;
+    private IProxyUserRepository proxy;
 
     @Override
     public User save(User user) {

@@ -14,7 +14,7 @@ import java.util.List;
  * Created by konst on 06.05.17.
  */
 @Transactional(readOnly = true)
-public interface ProxyUserRepository extends JpaRepository<User, Integer> {
+public interface IProxyUserRepository extends JpaRepository<User, Integer> {
 
     @Transactional
     @Modifying

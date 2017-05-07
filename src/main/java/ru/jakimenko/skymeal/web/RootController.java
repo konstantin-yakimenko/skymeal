@@ -13,7 +13,7 @@ public class RootController extends AbstractUserController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {
-        return "redirect:users";
+        return "redirect:planes";
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)

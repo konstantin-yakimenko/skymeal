@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.jakimenko.skymeal.AuthorizedUser;
 import ru.jakimenko.skymeal.model.User;
 import ru.jakimenko.skymeal.repository.IUserRepository;
-import ru.jakimenko.skymeal.repository.mock.UserRepositoryMock;
 import ru.jakimenko.skymeal.to.UserTo;
 import ru.jakimenko.skymeal.util.UserUtil;
 import ru.jakimenko.skymeal.util.exception.ExceptionUtil;
