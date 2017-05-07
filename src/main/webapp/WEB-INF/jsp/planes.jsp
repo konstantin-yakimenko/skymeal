@@ -10,18 +10,24 @@
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
+<script type="text/javascript" src="resources/js/datatablesUtil.js" defer></script>
+<script type="text/javascript" src="resources/js/planeDatatables.js" defer></script>
+
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
             <h3><spring:message code="planes.title"/></h3>
 
             <div class="view-box">
-                <a class="btn btn-sm btn-info" onclick="add('users.add')"><spring:message code="planes.add"/></a>
+                <a class="btn btn-sm btn-info" onclick="add('planes.add')"><spring:message code="planes.add"/></a>
 
                 <table class="table table-striped display" id="datatable">
                     <thead>
                     <tr>
-                        <th>Number</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Econom seats</th>
+                        <th>Business seats</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -46,31 +52,37 @@
 
                     <div class="form-group">
                         <label for="name" class="control-label col-xs-3">Name</label>
-
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="name" name="name" placeholder="Name">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="email" class="control-label col-xs-3">Email</label>
-
+                        <label for="type" class="control-label col-xs-3">Type</label>
                         <div class="col-xs-9">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="email">
+                            <input type="text" class="form-control" id="type" name="type" placeholder="Type">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="password" class="control-label col-xs-3">Password</label>
-
+                        <label for="seatEconom" class="control-label col-xs-3">Econom seat</label>
                         <div class="col-xs-9">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="">
+                            <input type="number" class="form-control" id="seatEconom" name="seatEconom" placeholder="Econom seat">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="seatBusiness" class="control-label col-xs-3">Business seat</label>
+                        <div class="col-xs-9">
+                            <input type="number" class="form-control" id="seatBusiness" name="seatBusiness" placeholder="Business seat">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" onclick="save()" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            </button>
                         </div>
                     </div>
                 </form:form>
@@ -84,6 +96,4 @@
 </script>
 <script type="text/javascript" src="webjars/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
-<script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
-<script type="text/javascript" src="resources/js/planeDatatables.js"></script>
 </html>

@@ -35,7 +35,7 @@ function extendsOpts(opts) {
 }
 
 function add(title) {
-    $('#modalTitle').html(title);
+    $('#modalTitle').html(i18n[title]);
     form.find(":input").val("");
     $('#editRow').modal();
 }
