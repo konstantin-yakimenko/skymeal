@@ -12,6 +12,8 @@
 
     <mvc:default-servlet-handler/>
 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
     <!-- TODO security and webjars -->
     <!--<security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>-->
 
