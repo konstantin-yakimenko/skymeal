@@ -13,7 +13,7 @@ public class RootController extends AbstractUserController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {
-        return "redirect:planes";
+        return "redirect:main";
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
@@ -24,6 +24,11 @@ public class RootController extends AbstractUserController {
     @RequestMapping(value = "/planes", method = RequestMethod.GET)
     public String planes() {
         return "planes";
+    }
+
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    public String main() {
+        return "main";
     }
 
 //    @RequestMapping(value = "/main", method = RequestMethod.GET)
@@ -44,7 +49,7 @@ public class RootController extends AbstractUserController {
 //                super.update(userTo);
 //                AuthorizedUser.get().update(userTo);
 //                status.setComplete();
-//                return "redirect:meals";
+//                return "redirect:users";
 //            } catch (DataIntegrityViolationException ex) {
 //                result.rejectValue("email", "exception.duplicate_email");
 //            }
