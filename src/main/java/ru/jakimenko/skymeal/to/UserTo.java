@@ -27,19 +27,14 @@ public class UserTo implements Serializable {
     @Size(min = 5, max = 64, message = " must between 5 and 64 characters")
     private String password;
 
-    @Range(min = 100, max = 5000)
-    @NotNull(message = " must not be empty")
-    private Integer caloriesPerDay = UserUtil.DEFAULT_CALORIES_PER_DAY;
-
     public UserTo() {
     }
 
-    public UserTo(Integer id, String name, String email, String password, int caloriesPerDay) {
+    public UserTo(Integer id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.caloriesPerDay = caloriesPerDay;
     }
 
     public Integer getId() {
@@ -78,21 +73,12 @@ public class UserTo implements Serializable {
         return id == null;
     }
 
-    public int getCaloriesPerDay() {
-        return caloriesPerDay;
-    }
-
-    public void setCaloriesPerDay(Integer caloriesPerDay) {
-        this.caloriesPerDay = caloriesPerDay;
-    }
-
     @Override
     public String toString() {
         return "UserTo{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", caloriesPerDay='" + caloriesPerDay + '\'' +
                 '}';
     }
 }

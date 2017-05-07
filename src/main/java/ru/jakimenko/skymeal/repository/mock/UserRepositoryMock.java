@@ -17,7 +17,6 @@ public class UserRepositoryMock implements IUserRepository {
 
     {
         u1 = new User();
-        u1.setCaloriesPerDay(1);
         u1.setEmail("u1@mail.ru");
         u1.setEnabled(true);
         u1.setPassword("111");
@@ -27,7 +26,6 @@ public class UserRepositoryMock implements IUserRepository {
         u1.setName("user1");
 
         u2 = new User();
-        u2.setCaloriesPerDay(1);
         u2.setEmail("u1@mail.ru");
         u2.setEnabled(true);
         u2.setPassword("111");

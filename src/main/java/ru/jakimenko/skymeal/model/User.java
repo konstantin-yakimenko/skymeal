@@ -8,10 +8,8 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.util.CollectionUtils;
 import ru.jakimenko.skymeal.View;
-import ru.jakimenko.skymeal.util.UserUtil;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
 import java.util.*;
 
 /**
@@ -60,26 +58,21 @@ public class User extends NamedEntity {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected Set<Role> roles;
 
-    @Column(name = "calories_per_day", columnDefinition = "default 2000")
-    @Digits(fraction = 0, integer = 4)
-    protected int caloriesPerDay = UserUtil.DEFAULT_CALORIES_PER_DAY;
-
     public User() {
     }
 
     public User(User u) {
-        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.getCaloriesPerDay(), u.isEnabled(), u.getRoles());
+        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.isEnabled(), u.getRoles());
     }
 
-    public User(Integer id, String name, String email, String password, int caloriesPerDay, Role role, Role... roles) {
-        this(id, name, email, password, caloriesPerDay, true, EnumSet.of(role, roles));
+    public User(Integer id, String name, String email, String password, Role role, Role... roles) {
+        this(id, name, email, password, true, EnumSet.of(role, roles));
     }
 
-    public User(Integer id, String name, String email, String password, int caloriesPerDay, boolean enabled, Set<Role> roles) {
+    public User(Integer id, String name, String email, String password, boolean enabled, Set<Role> roles) {
         super(id, name);
         this.email = email;
         this.password = password;
-        this.caloriesPerDay = caloriesPerDay;
         this.enabled = enabled;
         setRoles(roles);
     }
@@ -108,14 +101,6 @@ public class User extends NamedEntity {
         this.enabled = enabled;
     }
 
-    public int getCaloriesPerDay() {
-        return caloriesPerDay;
-    }
-
-    public void setCaloriesPerDay(int caloriesPerDay) {
-        this.caloriesPerDay = caloriesPerDay;
-    }
-
     public boolean isEnabled() {
         return enabled;
     }
@@ -140,7 +125,6 @@ public class User extends NamedEntity {
                 ", name=" + name +
                 ", enabled=" + enabled +
                 ", roles=" + roles +
-                ", caloriesPerDay=" + caloriesPerDay +
                 ')';
     }
 }
