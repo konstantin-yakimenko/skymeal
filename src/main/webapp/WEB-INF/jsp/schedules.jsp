@@ -13,11 +13,19 @@
 <script type="text/javascript" src="resources/js/datatablesUtil.js" defer></script>
 <script type="text/javascript" src="resources/js/scheduleDatatables.js" defer></script>
 
-
-
 <div class="jumbotron">
+
     <div class="container">
         <div class="shadow">
+            <div style="margin-top: 20px">
+                <label class="control-label">Select File</label>
+                <form id="form" method="post" enctype="multipart/form-data">
+                    <input id="file" name="file" type="file" class="filestyle">
+                </form>
+                <button value="Submit" onclick="uploadFormData()" class="btn btn-sm btn-info">Upload</button>
+            </div>
+
+
             <h3><spring:message code="schedules.title"/></h3>
 
             <div class="view-box">
@@ -37,40 +45,6 @@
             </div>
         </div>
     </div>
-</div>
-<%--action="/skymeal/ajax/admin/schedules/file"--%>
-<div class="container">
-    <form id="form2" method="post" enctype="multipart/form-data">
-        <input name="file2" id="file2" type="file" /><br/>
-    </form>
-    <button value="Submit" onclick="uploadFormData()" >Upload</button><i>Using FormData Object</i>
-    <%--<div id="result"></div>--%>
-    <%--
-        <form method="POST" enctype="multipart/form-data" id="fileUploadForm">
-            <input type="text" name="extraField"/><br/><br/>
-            <input type="file" name="files"/><br/><br/>
-            <input type="file" name="files"/><br/><br/>
-            <input type="submit" value="Submit" id="btnSubmit"/>
-        </form>
-    --%>
-    <%--
-        <form id="form2" method="post" action="/spring-mvc-file-upload/rest/cont/upload" enctype="multipart/form-data">
-            <input name="file2" id="file2" type="file" /><br/>
-        </form>
-
-        <button value="Submit" onclick="uploadJqueryForm()" >Upload</button><i>Using JQuery Form Plugin</i><br/>
-        <button value="Submit" onclick="uploadFormData()" >Upload</button><i>Using FormData Object</i>
-    --%>
-    <%--
-        <h3>Select file to upload</h3>
-        <p>
-            <input type="number" name="chunkSize" id="chunkSize" th:value="${chunkSize}"/><br/><br/>
-            <input type="file" name="fileToUpload" id="fileToUpload"><br/>
-        </p>
-        <p>
-            <input type="submit" value="Upload" name="submit">
-        </p>
-    --%>
 </div>
 
 
