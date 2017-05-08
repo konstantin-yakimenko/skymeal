@@ -1,11 +1,14 @@
 package ru.jakimenko.skymeal.to;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * Created by konst on 07.05.17.
  */
-public class ScheduleTo {
+public class ScheduleTo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private LocalDateTime date;
     private Integer number;
@@ -25,6 +28,10 @@ public class ScheduleTo {
     private Integer strewards;
     private String plane;
     private Integer planeId;
+    private boolean isEmpty = false;
+
+    public ScheduleTo() {
+    }
 
     public ScheduleTo(LocalDateTime date, Integer number, LocalDateTime regionDate, LocalDateTime planStart, LocalDateTime planFinish, String airportStart, String airportFinish, LocalDateTime factStart, LocalDateTime factFinish, LocalDateTime factStartUtc, LocalDateTime factFinishUtc, String airportFact, Integer pasEconom, Integer pasBusiness, Integer pilots, Integer strewards, String plane, Integer planeId) {
         this.date = date;
@@ -189,5 +196,38 @@ public class ScheduleTo {
 
     public void setPlaneId(Integer planeId) {
         this.planeId = planeId;
+    }
+
+    public void setEmpty() {
+        this.isEmpty = true;
+    }
+
+    @Override
+    public String toString() {
+        return "ScheduleTo{" +
+                "date=" + date +
+                ", number=" + number +
+                ", regionDate=" + regionDate +
+                ", planStart=" + planStart +
+                ", planFinish=" + planFinish +
+                ", airportStart='" + airportStart + '\'' +
+                ", airportFinish='" + airportFinish + '\'' +
+                ", factStart=" + factStart +
+                ", factFinish=" + factFinish +
+                ", factStartUtc=" + factStartUtc +
+                ", factFinishUtc=" + factFinishUtc +
+                ", airportFact='" + airportFact + '\'' +
+                ", pasEconom=" + pasEconom +
+                ", pasBusiness=" + pasBusiness +
+                ", pilots=" + pilots +
+                ", strewards=" + strewards +
+                ", plane='" + plane + '\'' +
+                ", planeId=" + planeId +
+                ", isEmpty=" + isEmpty +
+                '}';
+    }
+
+    public boolean isEmpty() {
+        return this.isEmpty;
     }
 }

@@ -232,4 +232,127 @@ public class Schedule extends BaseEntity {
     public void setPlane(Plane plane) {
         this.plane = plane;
     }
+
+    public static class ScheduleBuilder {
+        private LocalDateTime date;
+        private Integer number;
+        private LocalDateTime regionDate;
+        private LocalDateTime planStart;
+        private LocalDateTime planFinish;
+        private String airportStart;
+        private String airportFinish;
+        private LocalDateTime factStart;
+        private LocalDateTime factFinish;
+        private LocalDateTime factStartUtc;
+        private LocalDateTime factFinishUtc;
+        private String airportFact ;
+        private Integer pasEconom;
+        private Integer pasBusiness;
+        private Integer pilots;
+        private Integer strewards;
+
+        public ScheduleBuilder() {
+        }
+
+        public ScheduleBuilder setDate(LocalDateTime date) {
+            this.date = date;
+            return this;
+        }
+
+        public ScheduleBuilder setNumber(Integer number) {
+            this.number = number;
+            return this;
+        }
+
+        public ScheduleBuilder setRegionDate(LocalDateTime regionDate) {
+            this.regionDate = regionDate;
+            return this;
+        }
+
+        public ScheduleBuilder setPlanStart(LocalDateTime planStart) {
+            this.planStart = planStart;
+            return this;
+        }
+
+        public ScheduleBuilder setPlanFinish(LocalDateTime planFinish) {
+            this.planFinish = planFinish;
+            return this;
+        }
+
+        public ScheduleBuilder setAirportStart(String airportStart) {
+            this.airportStart = airportStart;
+            return this;
+        }
+
+        public ScheduleBuilder setAirportFinish(String airportFinish) {
+            this.airportFinish = airportFinish;
+            return this;
+        }
+
+        public ScheduleBuilder setFactStart(LocalDateTime factStart) {
+            this.factStart = factStart;
+            return this;
+        }
+
+        public ScheduleBuilder setFactFinish(LocalDateTime factFinish) {
+            this.factFinish = factFinish;
+            return this;
+        }
+
+        public ScheduleBuilder setFactStartUtc(LocalDateTime factStartUtc) {
+            this.factStartUtc = factStartUtc;
+            return this;
+        }
+
+        public ScheduleBuilder setFactFinishUtc(LocalDateTime factFinishUtc) {
+            this.factFinishUtc = factFinishUtc;
+            return this;
+        }
+
+        public ScheduleBuilder setAirportFact(String airportFact) {
+            this.airportFact = airportFact;
+            return this;
+        }
+
+        public ScheduleBuilder setPasEconom(Integer pasEconom) {
+            this.pasEconom = pasEconom;
+            return this;
+        }
+
+        public ScheduleBuilder setPasBusiness(Integer pasBusiness) {
+            this.pasBusiness = pasBusiness;
+            return this;
+        }
+
+        public ScheduleBuilder setPilots(Integer pilots) {
+            this.pilots = pilots;
+            return this;
+        }
+
+        public ScheduleBuilder setStrewards(Integer strewards) {
+            this.strewards = strewards;
+            return this;
+        }
+
+        public Schedule build() {
+            Schedule schedule = new Schedule();
+            schedule.setDate(this.date);
+            schedule.setNumber(this.number);
+            schedule.setRegionDate(this.regionDate);
+            schedule.setPlanStart(this.planStart);
+            schedule.setPlanFinish(this.planFinish);
+            schedule.setAirportStart(this.airportStart);
+            schedule.setAirportFinish(this.airportFinish);
+            schedule.setFactStart(this.factStart);
+            schedule.setFactFinish(this.factFinish);
+            schedule.setFactStartUtc(this.factStartUtc);
+            schedule.setFactFinishUtc(this.factFinishUtc);
+            schedule.setAirportFact(this.airportFact);
+            schedule.setPasEconom(this.pasEconom);
+            schedule.setPasBusiness(this.pasBusiness);
+            schedule.setPilots(this.pilots);
+            schedule.setStrewards(this.strewards);
+            return schedule;
+        }
+    }
 }
