@@ -58,39 +58,34 @@ public class ScheduleAjaxController extends AbstractScheduleController {
 
     @RequestMapping(value = "/file", method = RequestMethod.POST)
     public void uploadFile(MultipartHttpServletRequest request, HttpServletResponse response) {
-
-
         log.debug("yakimky - Single file upload! = {}", request);
         Iterator<String> itr =  request.getFileNames();
-
         MultipartFile mpf = request.getFile(itr.next());
+        uploadSchedule(mpf);
+    }
+
+    private void uploadSchedule(MultipartFile mpf) {
         log.debug("yakimky -- {}", mpf.getOriginalFilename());
         try {
             InputStream stream = mpf.getInputStream();
-
-// Create a workbook using the File System
             XSSFWorkbook myWorkBook = new XSSFWorkbook(stream);
-
-            // Get the first sheet from workbook
             XSSFSheet mySheet = myWorkBook.getSheetAt(0);
-
-            /** We now need something to iterate through the cells.**/
             Iterator<Row> rowIter = mySheet.rowIterator();
             while(rowIter.hasNext()){
-
                 XSSFRow myRow = (XSSFRow) rowIter.next();
                 Iterator<Cell> cellIter = myRow.cellIterator();
                 while(cellIter.hasNext()){
-
                     XSSFCell myCell = (XSSFCell) cellIter.next();
-                    //get cell index
                     log.debug("Cell column index: {}", myCell.getColumnIndex());
-                    //get cell type
                     log.debug("Cell Type: {}", myCell.getCellType());
-
+//                    log.debug("Cell Value: {}", myCell.getStringCellValue());
                     switch (myCell.getCellType()) {
                         case Cell.CELL_TYPE_NUMERIC:
-                            log.debug("Cell Value: {}", myCell.getNumericCellValue());
+                            try {
+                                log.debug("Cell Value num : {}", myCell.getNumericCellValue());
+                                log.debug("Cell Value date: {}", myCell.getDateCellValue());
+                            } catch (Exception e) {}
+
                             break;
                         case Cell.CELL_TYPE_STRING:
                             log.debug("Cell Value: {}", myCell.getStringCellValue());
@@ -105,15 +100,6 @@ public class ScheduleAjaxController extends AbstractScheduleController {
             log.error(Arrays.toString(e.getStackTrace()));
             e.printStackTrace();
         }
-
-
-//            ufile.length = mpf.getBytes().length;
-//            ufile.bytes= mpf.getBytes();
-//            ufile.type = mpf.getContentType();
-//            ufile.name = mpf.getOriginalFilename();
-
-
-
     }
 
 }
